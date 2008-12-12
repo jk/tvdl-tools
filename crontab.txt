@@ -1,3 +1,3 @@
 #M    S   T M W    Befehl
-*/10     *   * * *    /Users/jkohl/Sites/torrentwatcher.php &> /dev/null
-*/10	 *   * * *    /Users/jkohl/Sites/moviesorter.php &> /dev/null
+*/10     *   * * *    ~/scripts/torrentwatcher.php &> /dev/null
+*/10	 *   * * *    ~/scripts/moviesorter.php &> /dev/null
