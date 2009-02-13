@@ -5,12 +5,29 @@
  * werden die gefundenen Serien umbenannt und in eine Ordnerhierarchie
  * einsortiert. Ausserdem gibt es per Growl eine Benachrichtigung.
  *
- * @version 1.3 (2008-10-21)
+ * @version 1.4 (2009-02-13)
  * @author Jens Kohl <jens.kohl@gmail.com>
  */
 
-define(LOGGING, true);
-define(RENAME_DIVX, false);
+define("DIR", dirname(__FILE__));
+function absolute_path($file) {
+	if (substr($file, 0, 1) == '/')
+		return $file;
+	else
+		return dirname(__FILE__).'/'.$file;
+}
+
+$config = simplexml_load_file(absolute_path('config.xml'));
+
+define(LOGGING, $config->sorter->logging->attributes()->active);
+define(RENAME_DIVX, $config->sorter->rename_divx->attributes()->active);
+
+foreach ($config->sorter->sources->directory as $key => $value) {
+	echo "$value\n";
+	# code...
+}
+
+die();
 
 // In welchen Verzeichnissen soll nach Serien gesucht werden?
 $src_array = array(

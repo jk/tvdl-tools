@@ -1,9 +1,27 @@
 #!/usr/bin/php
 <?php
-define("FEED", "http://tvrss.net/feed/eztv/");
-define("WATCHFOLDER", "/Users/jkohl/Downloads/Watchfolder");
-define("IDFILE", '/Users/jkohl/Sites/torrentwatcher.dat');
-define("DEBUG", 0);
+define("DIR", dirname(__FILE__));
+function absolute_path($file) {
+	if (substr($file, 0, 1) == '/')
+		return $file;
+	else
+		return dirname(__FILE__).'/'.$file;
+}
+
+
+$config = simplexml_load_file(absolute_path('config.xml'));
+
+define("FEED", $config->watcher->feeds->feed[0]);
+define("WATCHFOLDER", absolute_path($config->watcher->watchfolder));
+define("IDFILE", absolute_path($config->watcher->idfile));
+define("DEBUG", $config->watcher->debug->attributes()->active);
+
+echo FEED."\n";
+echo WATCHFOLDER."\n";
+echo IDFILE."\n";
+echo DEBUG."\n";
+
+die('trin');
 
 $shows = array(
 	'/Numb3rs \d+x\d+ \[HDTV \- \w+\]/i',
@@ -27,8 +45,8 @@ $shows = array(
 	'/True Blood \d+x\d+(.*?)720p(.*?)/i',
 	'/Heroes \d+x\d+ \[HDTV \- \w+\]/i',
 	'/Entourage \d+x\d+ \[HDTV \- \w+\]/i',
-	'/Greys Anatomy .*?\d+x\d \[HDTV \- \w+\]/i',
-	'/Greys Anatomy .*?\d+x\d(.*?)720p(.*?)/i',
+	'/Greys Anatomy.*?\d+x\d \[HDTV \- \w+\]/i',
+	'/Greys Anatomy.*?\d+x\d(.*?)720p(.*?)/i',
 	'/^ER \d+x\d+ \[HDTV \- \w+\]/i',
 	'/Knight Rider 2008 \d+x\d+ \[720P \- HDTV \- \w+\]/i',
 	'/Chuck \d+x\d+ \[HDTV \- \w+\]/i',
@@ -38,7 +56,10 @@ $shows = array(
 	'/Private Practice \d+x\d+/i',
 	'/House \d+x\d+(.*?)720p(.*?)/i',
 	'/Boston Legal \d+x\d+/i',
-	'/The IT Crowd \d+x\d+/i'
+	'/The IT Crowd \d+x\d+/i',
+	'/The Office \d+x\d+/i',
+	'/Skins \d+x\d+/i',
+	'/Hustle \d+x\d+/i'
 	);
 	
 
