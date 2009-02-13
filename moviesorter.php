@@ -9,12 +9,14 @@
  * @author Jens Kohl <jens.kohl@gmail.com>
  */
 
+define(LOGGING, true);
+define(RENAME_DIVX, false);
+
 // In welchen Verzeichnissen soll nach Serien gesucht werden?
 $src_array = array(
 	'/Users/jkohl/Downloads-BT',
 	'/Users/jkohl/Movies',
-	'/Users/jkohl/Movies/TV-Serien',
-	'/Volumes/TV-Serien'
+	'/Users/jkohl/Movies/TV-Serien'
 );
 
 // Umbenannte Dateien werden in eins der folgenden Verzeichnisse
@@ -23,10 +25,17 @@ $src_array = array(
 //define('DST_DIR', '/Volumes/TV-Serien');
 $dst_array = array(
 	'/Volumes/Serien',
-	'/Volumes/TV-Serien'
+	'/Volumes/Filme'
 );
 
 //define('DST_DIR', '/Users/jkohl/Movies/TV-Serien');
+
+// Wenn das Skript auf der Kommandozeile mit dem Parameter now gestartet
+// wird, dann gibt es keine Gracetime für neu hinzugefügte Dateien. Also
+// aufpassen was ihr tut.
+if($argv[1] == 'now') {
+	define(NOW, true);
+}
 
 /**
  * Funktion verschriebt Dateien in in eine geparste Ordnerhierarchie
@@ -49,7 +58,7 @@ function move_file($in_file, $dir) {
 		$episode = ($treffer[4]) ? (int) $treffer[4] : (int) $treffer[6];
 		$extension = $treffer[7];
 	
-		if (preg_match('/xvid/i', $in_file)) {
+		if (RENAME_DIVX && preg_match('/xvid/i', $in_file)) {
 			$extension = 'divx';
 		}
 		
@@ -75,6 +84,14 @@ function move_file($in_file, $dir) {
 				rename($dir.'/'.$in_file, $new_file);
 				echo "INFO: $title $season x $episode nach $thisDest verschoben.\n";
 				$moved = true;
+				
+				if(LOGGING) {
+					// Logfile schreiben
+					$logfile = $dst_array[0]."/moviesorter.log";
+					$logline = '['.strftime("%Y-%m-%d %H:%M")."] $title ({$season}x{$episode})\n";
+					file_put_contents($logfile, $logline, FILE_APPEND | FILE_TEXT);
+				}
+				
 				return "Moved $title ($season x $episode)\n";
 			}
 			
@@ -95,8 +112,17 @@ foreach($src_array as $thisSource) {
 			$fullfile = $thisSource.'/'.$file;
 	        if (!is_dir($fullfile) && $file != '.' && $file != '..' && substr($file, 0, 1) != '.' ) {
 				// Wenn Datei vor weniger als 20 Minuten modifiziert wurde, dann ueberspringen
-				if (fileatime($fullfile) >= (mktime() - 60 * 20))
-					continue;
+				if (fileatime($fullfile) >= (mktime() - 60 * 20)) {
+					if (NOW) {
+						$ETA = fileatime($fullfile) - (mktime()-60*20);
+						$ETA /= 60;
+						$ETA = round($ETA);
+						echo "DELAYED ($ETA mins): $fullfile\n";
+					}
+					else {
+						continue;
+					}
+				}
 
 				$output .= move_file($file, $thisSource);
 	        }

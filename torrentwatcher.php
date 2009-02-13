@@ -22,6 +22,7 @@ $shows = array(
 	'/Gossip Girl \d+x\d+ \[HDTV \- \w+\]/i',
 	'/Privileged \d+x\d+ \[HDTV \- \w+\]/i',
 	'/Do Not Disturb \d+x\d+(.*?)/i',
+	'/Chuck \d+x\d(.*?)/i',
 	'/Mad Men \d+x\d+(.*?)/i',
 	'/True Blood \d+x\d+(.*?)720p(.*?)/i',
 	'/Heroes \d+x\d+ \[HDTV \- \w+\]/i',
