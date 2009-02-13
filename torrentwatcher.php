@@ -4,6 +4,8 @@ define("DIR", dirname(__FILE__));
 function absolute_path($file) {
 	if (substr($file, 0, 1) == '/')
 		return $file;
+	elseif (substr($file, 0, 0) == '~')
+		return getenv('HOME').substr($file, 1);
 	else
 		return dirname(__FILE__).'/'.$file;
 }
@@ -15,13 +17,6 @@ define("FEED", $config->watcher->feeds->feed[0]);
 define("WATCHFOLDER", absolute_path($config->watcher->watchfolder));
 define("IDFILE", absolute_path($config->watcher->idfile));
 define("DEBUG", $config->watcher->debug->attributes()->active);
-
-echo FEED."\n";
-echo WATCHFOLDER."\n";
-echo IDFILE."\n";
-echo DEBUG."\n";
-
-die('trin');
 
 $shows = array(
 	'/Numb3rs \d+x\d+ \[HDTV \- \w+\]/i',

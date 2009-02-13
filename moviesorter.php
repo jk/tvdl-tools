@@ -13,6 +13,8 @@ define("DIR", dirname(__FILE__));
 function absolute_path($file) {
 	if (substr($file, 0, 1) == '/')
 		return $file;
+	elseif (substr($file, 0, 0) == '~')
+		return getenv('HOME').substr($file, 1);
 	else
 		return dirname(__FILE__).'/'.$file;
 }
@@ -21,31 +23,6 @@ $config = simplexml_load_file(absolute_path('config.xml'));
 
 define(LOGGING, $config->sorter->logging->attributes()->active);
 define(RENAME_DIVX, $config->sorter->rename_divx->attributes()->active);
-
-foreach ($config->sorter->sources->directory as $key => $value) {
-	echo "$value\n";
-	# code...
-}
-
-die();
-
-// In welchen Verzeichnissen soll nach Serien gesucht werden?
-$src_array = array(
-	'/Users/jkohl/Downloads-BT',
-	'/Users/jkohl/Movies',
-	'/Users/jkohl/Movies/TV-Serien'
-);
-
-// Umbenannte Dateien werden in eins der folgenden Verzeichnisse
-// verschoben. Genauer: In das erste Verzeichnis, in dem genug
-// Platz für die Datei ist.
-//define('DST_DIR', '/Volumes/TV-Serien');
-$dst_array = array(
-	'/Volumes/Serien',
-	'/Volumes/Filme'
-);
-
-//define('DST_DIR', '/Users/jkohl/Movies/TV-Serien');
 
 // Wenn das Skript auf der Kommandozeile mit dem Parameter now gestartet
 // wird, dann gibt es keine Gracetime für neu hinzugefügte Dateien. Also
@@ -66,7 +43,7 @@ function move_file($in_file, $dir) {
 	if (preg_match('/(.*?)(S(\d{1,2})E(\d{1,2})|(\d{1,2})x(\d{1,2})).*?\.(avi|divx|mkv|mov|wmv)$/i', $in_file, $treffer)) {
 		//var_dump($treffer);
 		
-		global $dst_array;
+		global $config;
 		
 		$title   = $treffer[1];
 		$title   = preg_replace('/(\.|-|_)/i', ' ', $title);
@@ -81,7 +58,7 @@ function move_file($in_file, $dir) {
 		
 		$moved = false;
 		$filesize = filesize($dir.'/'.$in_file);
-		foreach($dst_array as $thisDest) {
+		foreach($config->sorter->destination->directory as $thisDest) {
 			if (disk_free_space($thisDest) < $filesize) {
 				# Ziellaufwerk zu klein
 				echo 'WARN: '.$thisDest.' verfügt nicht über genügend Platz für '.$in_file."\n";
@@ -104,7 +81,7 @@ function move_file($in_file, $dir) {
 				
 				if(LOGGING) {
 					// Logfile schreiben
-					$logfile = $dst_array[0]."/moviesorter.log";
+					$logfile = $config->sorter->destination->directory[0]."/moviesorter.log";
 					$logline = '['.strftime("%Y-%m-%d %H:%M")."] $title ({$season}x{$episode})\n";
 					file_put_contents($logfile, $logline, FILE_APPEND | FILE_TEXT);
 				}
@@ -121,7 +98,7 @@ function move_file($in_file, $dir) {
 
 $output = '';
 
-foreach($src_array as $thisSource) {
+foreach($config->sorter->sources->directory as $thisSource) {
 	echo $thisSource . ' überprüfen…'."\n";
 	
 	if ($handle = opendir($thisSource)) {
