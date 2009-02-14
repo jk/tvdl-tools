@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config version="1">
+	<!-- Moviesorter //-->
+	<sorter>
+		<debug active="0"/>
+		<gracetime minutes="20"/>
+		<logging active="1"/>
+		<rename_divx active="1"/>
+		<sources>
+			<!-- In welchen Verzeichnissen soll nach Serien gesucht werden?	//-->
+			<directory>~/Downloads/Shows</directory>
+			<directory>/external_drive/Shows</directory>
+		</sources>
+		<destination>
+			<!-- 
+				Umbenannte Dateien werden in eins der folgenden Verzeichnisse
+				verschoben. Genauer: In das erste Verzeichnis, in dem genug
+				Platz für die Datei ist.
+				
+				Achtung: Reihenfolge ist wichtig
+			//-->
+			<directory>/Volumes/ShowTank</directory>
+			<directory>/Volumes/ShowArchive</directory>
+		</destination>
+	</sorter>
+	<!-- Torrentwatcher //-->
+	<watcher>
+		<feeds>
+			<feed>http://tvrss.net/feed/eztv/</feed>
+		</feeds>
+		<watchfolder>/path_to/Watchfolder</watchfolder>
+		<idfile>torrentwatcher.dat</idfile>
+		<debug active="0"/>
+		<shows>
+			<show>
+				<regexp>/ShowName \d+x\d+/i</regexp>
+			</show>
+		</shows>
+	</watcher>
+</config>
