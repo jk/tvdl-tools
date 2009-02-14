@@ -34,8 +34,115 @@
 		<debug active="0"/>
 		<shows>
 			<show>
-				<title>bla</title>
-				<regexp>//i</regexp>
+				<regexp>/Numb3rs \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/CSI \d+x\d+ \[HDTV \- LOL\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/How I Met Your Mother \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/The Big Bang Theory(.*?) \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Eureka \d+x\d+(.*?)720p(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/Eureka \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Flashpoint \d+x\d(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/Eli Stone \d+x\d(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/How Not to Live Your Life \d+x\d(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/Fringe \d+x\d+ \[720P \- HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/90210 \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/One Tree Hill \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Rush \d+x\d+ \[HDTV - \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Gossip Girl \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Privileged \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Do Not Disturb \d+x\d+(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/Chuck \d+x\d(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/Mad Men \d+x\d+(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/True Blood \d+x\d+(.*?)720p(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/Heroes \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Entourage \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Greys Anatomy.*?\d+x\d \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Greys Anatomy.*?\d+x\d(.*?)720p(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/^ER \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Knight Rider 2008 \d+x\d+ \[720P \- HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Chuck \d+x\d+ \[HDTV \- \w+\]/i</regexp>
+			</show>
+			<show>
+				<regexp>/Damages \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/Californication \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/^30 Rock \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/Private Practice \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/House \d+x\d+(.*?)720p(.*?)/i</regexp>
+			</show>
+			<show>
+				<regexp>/Boston Legal \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/The IT Crowd \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/The Office \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/Skins \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/Hustle \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/Dollhouse \d+x\d+/i</regexp>
 			</show>
 		</shows>
 	</watcher>
