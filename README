@@ -1,0 +1,12 @@
+TVDL-Tools
+==========
+
+Einige PHP-Skripte zum parsen von Torrent-RSS und verwalten der heruntergeladenen Inhalte.
+
+INSTALL
+=======
+
+• Die beiden PHP-Dateien irgendwo hinkopieren wo sie nicht stören.
+• PHP-Dateien mit chmod +x *.php ausführbar machen.
+• config.xml den eigenen Wünschen nach anpassen.
+• mit »crontab -e« wie in crontab.txt beschrieben periodisch ausführbar machen.

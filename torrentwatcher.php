@@ -10,7 +10,6 @@ function absolute_path($file) {
 		return dirname(__FILE__).'/'.$file;
 }
 
-
 $config = simplexml_load_file(absolute_path('config.xml'));
 
 define("FEED", $config->watcher->feeds->feed[0]);
@@ -54,7 +53,8 @@ $shows = array(
 	'/The IT Crowd \d+x\d+/i',
 	'/The Office \d+x\d+/i',
 	'/Skins \d+x\d+/i',
-	'/Hustle \d+x\d+/i'
+	'/Hustle \d+x\d+/i',
+	'/Dollhouse \d+x\d+/i'
 	);
 	
 
