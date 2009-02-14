@@ -36,4 +36,17 @@ function download($url, $file) {
 	curl_close($sh);
 	fclose($hFile);
 }
+
+function check_for_configfile() {
+	if(!file_exists(absolute_path('config.xml'))) {
+		if(file_exists(absolute_path('cofig.xml-dist'))) {
+			writeLog('Vor der Nutzung »config.xml-dist« in »config.xml« umbennen und anpassen.', FAIL);
+			die();
+		}
+		else {
+			writeLog('Konfigurationsdatei »config.xml« nicht vorhanden.', FAIL);
+			die();
+		}
+	}
+}
 ?>

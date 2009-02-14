@@ -1,6 +1,7 @@
 #!/usr/bin/php
 <?php
 require_once('inc.functions.php');
+check_for_configfile();
 
 $config = simplexml_load_file(absolute_path('config.xml'));
 
