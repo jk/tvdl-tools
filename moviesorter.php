@@ -9,15 +9,7 @@
  * @author Jens Kohl <jens.kohl@gmail.com>
  */
 
-define("DIR", dirname(__FILE__));
-function absolute_path($file) {
-	if (substr($file, 0, 1) == '/')
-		return $file;
-	elseif (substr($file, 0, 0) == '~')
-		return getenv('HOME').substr($file, 1);
-	else
-		return dirname(__FILE__).'/'.$file;
-}
+require_once('inc.functions.php');
 
 $config = simplexml_load_file(absolute_path('config.xml'));
 
