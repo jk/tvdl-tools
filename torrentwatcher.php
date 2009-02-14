@@ -50,21 +50,6 @@ $shows = array(
 	);
 	
 
-function writeLog($msg) {
-	echo strftime("[%H:%M:%S] ") . $msg . "\n";
-}
-
-function download($url, $file) {
-	$sh = curl_init($url);
-	$hFile = fopen($file, 'w');
-	curl_setopt($sh, CURLOPT_FILE, $hFile);
-	curl_setopt($sh, CURLOPT_HEADER, 0);
-	curl_exec($sh);
-	curl_close($sh);
-	fclose($hFile);
-}
-
-
 if (count($argv) > 1) {
 	if ($argv[1] == '-t') {
 		$testStrings = array(

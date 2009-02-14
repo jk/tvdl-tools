@@ -53,7 +53,7 @@ function move_file($in_file, $dir) {
 		foreach($config->sorter->destination->directory as $thisDest) {
 			if (disk_free_space($thisDest) < $filesize) {
 				# Ziellaufwerk zu klein
-				echo 'WARN: '.$thisDest.' verfügt nicht über genügend Platz für '.$in_file."\n";
+				writelog($thisDest.' verfügt nicht über genügend Platz für '.$in_file, WARN);
 			}
 			else
 			{
@@ -68,7 +68,7 @@ function move_file($in_file, $dir) {
 
 				$new_file = $thisDest.'/'.$title."/Season ".$season."/".sprintf("%02dx%02d", $season, $episode)." - $title.$extension";
 				rename($dir.'/'.$in_file, $new_file);
-				echo "INFO: $title $season x $episode nach $thisDest verschoben.\n";
+				writelog("$title $season x $episode nach $thisDest verschoben.", INFO);
 				$moved = true;
 				
 				if(LOGGING) {
@@ -82,7 +82,7 @@ function move_file($in_file, $dir) {
 			}
 			
 			if (!$moved) {
-				echo 'FAIL: Kein Platz für ' . $in_file ." vorhanden.\n";
+				writelog('Kein Platz für ' . $in_file ." vorhanden.", FAIL);
 			}
 		}
 	}
@@ -91,7 +91,7 @@ function move_file($in_file, $dir) {
 $output = '';
 
 foreach($config->sorter->sources->directory as $thisSource) {
-	echo $thisSource . ' überprüfen…'."\n";
+	writelog($thisSource . ' überprüfen…', INFO);
 	
 	if ($handle = opendir($thisSource)) {
 	    while (false !== ($file = readdir($handle))) {
@@ -103,7 +103,7 @@ foreach($config->sorter->sources->directory as $thisSource) {
 						$ETA = fileatime($fullfile) - (mktime()-60*20);
 						$ETA /= 60;
 						$ETA = round($ETA);
-						echo "DELAYED ($ETA mins): $fullfile\n";
+						writelog("DELAYED ($ETA mins): $fullfile", INFO);
 					}
 					else {
 						continue;
