@@ -5,7 +5,7 @@
 		<debug active="0"/>
 		<gracetime minutes="20"/>
 		<logging active="1"/>
-		<rename_divx active="1"/>
+		<rename_divx active="0"/>
 		<sources>
 			<!-- In welchen Verzeichnissen soll nach Serien gesucht werden?	//-->
 			<directory>/Users/jkohl/Downloads-BT</directory>
@@ -144,6 +144,10 @@
 			<show>
 				<regexp>/Dollhouse \d+x\d+/i</regexp>
 			</show>
+			<show>
+				<regexp>/Flight of the conchords \d+x\d+/i</regexp>
+			</show>
+			
 		</shows>
 	</watcher>
 </config>

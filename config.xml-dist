@@ -5,7 +5,7 @@
 		<debug active="0"/>
 		<gracetime minutes="20"/>
 		<logging active="1"/>
-		<rename_divx active="1"/>
+		<rename_divx active="0"/>
 		<sources>
 			<!-- In welchen Verzeichnissen soll nach Serien gesucht werden?	//-->
 			<directory>~/Downloads/Shows</directory>

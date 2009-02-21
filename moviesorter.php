@@ -75,7 +75,9 @@ function move_file($in_file, $dir) {
 				if(LOGGING) {
 					// Logfile schreiben
 					$logfile = $config->sorter->destination->directory[0]."/moviesorter.log";
-					$logline = '['.strftime("%Y-%m-%d %H:%M")."] $title ({$season}x{$episode})\n";
+					if ($extension == 'mkv')
+						$SDorHD = ' HD';
+					$logline = '['.strftime("%Y-%m-%d %H:%M")."] $title ({$season}x{$episode})$SDorHD\n";
 					file_put_contents($logfile, $logline, FILE_APPEND | FILE_TEXT);
 				}
 				
