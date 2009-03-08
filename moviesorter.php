@@ -11,8 +11,11 @@
 
 require_once('inc.functions.php');
 check_for_configfile();
+require_once('class.microbloging.php');
 
 $config = simplexml_load_file(absolute_path('config.xml'));
+
+$microbloging = new Microbloging($config->microbloging->service);
 
 define(LOGGING, $config->sorter->logging->attributes()->active);
 define(RENAME_DIVX, $config->sorter->rename_divx->attributes()->active);
@@ -22,6 +25,8 @@ define(RENAME_DIVX, $config->sorter->rename_divx->attributes()->active);
 // aufpassen was ihr tut.
 if($argv[1] == 'now') {
 	define(NOW, true);
+} else {
+	define(NOW, false);
 }
 
 /**
@@ -74,12 +79,15 @@ function move_file($in_file, $dir) {
 				
 				if(LOGGING) {
 					// Logfile schreiben
+					global $SDorHD;
 					$logfile = $config->sorter->destination->directory[0]."/moviesorter.log";
 					if ($extension == 'mkv')
 						$SDorHD = ' HD';
 					$logline = '['.strftime("%Y-%m-%d %H:%M")."] $title ({$season}x{$episode})$SDorHD\n";
 					file_put_contents($logfile, $logline, FILE_APPEND | FILE_TEXT);
 				}
+				
+				$microbloging->send($title.' S'.sprintf('%02d', $season).'E'.sprintf('%02d', $episode).$SDorHD);
 				
 				return "Moved $title ($season x $episode)\n";
 			}
@@ -101,9 +109,9 @@ foreach($config->sorter->sources->directory as $thisSource) {
 			$fullfile = $thisSource.'/'.$file;
 	        if (!is_dir($fullfile) && $file != '.' && $file != '..' && substr($file, 0, 1) != '.' ) {
 				// Wenn Datei vor weniger als 20 Minuten modifiziert wurde, dann ueberspringen
-				if (fileatime($fullfile) >= (mktime() - 60 * 20)) {
+				if (fileatime($fullfile) >= (mktime() - ($config->sorter->gracetime->attributes()->minutes * 60))) {
 					if (NOW) {
-						$ETA = fileatime($fullfile) - (mktime()-60*20);
+						$ETA = fileatime($fullfile) - (mktime()-($config->sorter->gracetime->attributes()->minutes * 60));
 						$ETA /= 60;
 						$ETA = round($ETA);
 						writelog("DELAYED ($ETA mins): $fullfile", INFO);

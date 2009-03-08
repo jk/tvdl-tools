@@ -2,8 +2,11 @@
 <?php
 require_once('inc.functions.php');
 check_for_configfile();
+require_once('class.microbloging.php');
 
 $config = simplexml_load_file(absolute_path('config.xml'));
+
+$microbloging = new Microbloging($config->microbloging->service);
 
 define("FEED", $config->watcher->feeds->feed[0]);
 define("WATCHFOLDER", absolute_path($config->watcher->watchfolder));
@@ -125,6 +128,8 @@ foreach($xml->channel->item as $item) {
 	$gTitle = $title . " ".$season."x".sprintf("%02d", $episode);
 	`growlnotify -t "$gTitle" -m "Neue $title-Folge als Torrent verfügbar und im Watchfolder gespeichert." -I ~/Downloads/`;
 	`curl $url --output $filename`;
+	
+	$microbloging->send($title.' S'.sprintf('%02d', $season).'E'.sprintf('%02d', $episode).' Torrent gefunden.');
 	
 	$ids[] = $id; // ID cachen
 	

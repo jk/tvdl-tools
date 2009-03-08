@@ -147,7 +147,18 @@
 			<show>
 				<regexp>/Flight of the conchords \d+x\d+/i</regexp>
 			</show>
+			<show>
+				<regexp>/Brothers and Sisters \d+x\d+/i</regexp>
+			</show>
+			<show>
+				<regexp>/Burn Notice \d+x\d/i</regexp>
+			</show>
 			
 		</shows>
 	</watcher>
+	<microbloging>
+		<service>twitter</service>
+		<username>MiniShow</username>
+		<password>cHUswukane4uMu4r</password>
+	</microbloging>
 </config>

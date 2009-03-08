@@ -37,4 +37,9 @@
 			</show>
 		</shows>
 	</watcher>
+	<microbloging>
+		<service>twitter</service>
+		<username>username</username>
+		<password>passwd</password>
+	</microbloging>
 </config>
