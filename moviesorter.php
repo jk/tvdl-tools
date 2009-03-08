@@ -15,7 +15,9 @@ require_once('class.microbloging.php');
 
 $config = simplexml_load_file(absolute_path('config.xml'));
 
-$microbloging = new Microbloging($config->microbloging->service);
+$microbloging = new Microbloging($config->microbloging->service, 
+	$config->microbloging->username,
+	$config->microbloging->password);
 
 define(LOGGING, $config->sorter->logging->attributes()->active);
 define(RENAME_DIVX, $config->sorter->rename_divx->attributes()->active);

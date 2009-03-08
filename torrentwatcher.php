@@ -6,7 +6,9 @@ require_once('class.microbloging.php');
 
 $config = simplexml_load_file(absolute_path('config.xml'));
 
-$microbloging = new Microbloging($config->microbloging->service);
+$microbloging = new Microbloging($config->microbloging->service, 
+	$config->microbloging->username,
+	$config->microbloging->password);
 
 define("FEED", $config->watcher->feeds->feed[0]);
 define("WATCHFOLDER", absolute_path($config->watcher->watchfolder));

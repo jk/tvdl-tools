@@ -5,13 +5,14 @@ class Microbloging {
 	private $curl = null;
 	private $service = 'twitter'; // Default: Twitter
 	
-	function __construct($service) {
+	function __construct($service, $username, $passwd) {
+		
 		$this->service = $service;
 		
 		if ($service == 'twitter') {
 			// Twitter
 			$url = 'http://twitter.com/statuses/update.xml';
-			$authString = $config->microbloging->username.":".$config->microbloging->password;
+			$authString = $username.":".$passwd;
 			$this->curl = curl_init();
 			curl_setopt($this->curl, CURLOPT_URL, $url);
 			curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, 2);
