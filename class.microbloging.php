@@ -45,7 +45,7 @@ class Microbloging {
 	}
 	
 	function send($message) {
-		$message = short($message, 140);
+		$message = $this->short($message, 140);
 		if ($this->service == 'twitter') {
 			curl_setopt($this->curl, CURLOPT_POSTFIELDS, 'status='.$message);
 			$this->buffer = curl_exec($this->curl);
