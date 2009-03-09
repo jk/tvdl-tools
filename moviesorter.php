@@ -43,7 +43,7 @@ function move_file($in_file, $dir) {
 	if (preg_match('/(.*?)(S(\d{1,2})E(\d{1,2})|(\d{1,2})x(\d{1,2})).*?\.(avi|divx|mkv|mov|wmv)$/i', $in_file, $treffer)) {
 		//var_dump($treffer);
 		
-		global $config;
+		global $config, $microbloging;
 		
 		$title   = $treffer[1];
 		$title   = preg_replace('/(\.|-|_)/i', ' ', $title);
@@ -89,7 +89,7 @@ function move_file($in_file, $dir) {
 					file_put_contents($logfile, $logline, FILE_APPEND | FILE_TEXT);
 				}
 				
-				$microbloging->send($title.' S'.sprintf('%02d', $season).'E'.sprintf('%02d', $episode).$SDorHD);
+				$microbloging->send($title.' S'.sprintf('%02d', $season).'E'.sprintf('%02d', $episode).$SDorHD.' fertig heruntergeladen.');
 				
 				return "Moved $title ($season x $episode)\n";
 			}
