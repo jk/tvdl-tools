@@ -131,7 +131,7 @@ foreach($xml->channel->item as $item) {
 	`growlnotify -t "$gTitle" -m "Neue $title-Folge als Torrent verfügbar und im Watchfolder gespeichert." -I ~/Downloads/`;
 	`curl $url --output $filename`;
 	
-	$microbloging->send($title.' S'.sprintf('%02d', $season).'E'.sprintf('%02d', $episode).' Torrent gefunden.');
+	$microbloging->send($title.' S'.sprintf('%02d', $season).'E'.sprintf('%02d', $episode).' gefunden. #tvdl');
 	
 	$ids[] = $id; // ID cachen
 	

@@ -89,7 +89,7 @@ function move_file($in_file, $dir) {
 					file_put_contents($logfile, $logline, FILE_APPEND | FILE_TEXT);
 				}
 				
-				$microbloging->send($title.' S'.sprintf('%02d', $season).'E'.sprintf('%02d', $episode).$SDorHD.' fertig heruntergeladen.');
+				$microbloging->send($title.' S'.sprintf('%02d', $season).'E'.sprintf('%02d', $episode).$SDorHD.' fertig heruntergeladen. #tvdl');
 				
 				return "Moved $title ($season x $episode)\n";
 			}
