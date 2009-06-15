@@ -26,7 +26,8 @@
 	<!-- Torrentwatcher //-->
 	<watcher>
 		<feeds>
-			<feed>http://tvrss.net/feed/eztv/</feed>
+			<!--<feed>http://tvrss.net/feed/eztv/</feed>//-->
+			<feed>http://www.mininova.org/rss.xml?user=EZTV</feed>
 		</feeds>
 		<watchfolder>/path_to/Watchfolder</watchfolder>
 		<idfile>torrentwatcher.dat</idfile>
